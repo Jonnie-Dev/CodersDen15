@@ -11,10 +11,10 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-  // inputs are 2 linked lists: l1 and l2
+  // inputs: are 2 linked lists: l1 and l2
   // output: a linked list: l3
   // l3 = l1 + l2
-  //   convert l3 to a linked list
+  // convert l3 to a linked list
 
   function ListNode(val, next) {
     this.val = val === undefined ? 0 : val;
@@ -73,18 +73,14 @@ var addTwoNumbers = function (l1, l2) {
 
   let l3 = new ListNode();
 
-  let add = (element, list) => {
+  let add = (element) => {
     var node = new ListNode(element);
 
     var current;
-    console.log(list);
 
-    if (list.head == null) {
-      list.head = node;
-
-      console.log(node);
-    } else {
-      current = list.head;
+    if (l3.val == 0 && l3.next == null) l3 = node;
+    else {
+      current = l3;
 
       while (current.next) {
         current = current.next;
@@ -92,11 +88,10 @@ var addTwoNumbers = function (l1, l2) {
 
       current.next = node;
     }
-    console.log(current);
   };
 
   for (let i = 0; i < sum.length; i++) {
-    add(sum[i], l3);
+    add(sum[i]);
   }
 
   console.log(l3);
@@ -202,5 +197,3 @@ newList2.add(6);
 newList2.add(4);
 
 console.log(addTwoNumbers(newList1, newList2));
-
-// console.log(9999999 + 9999)
