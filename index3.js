@@ -10,75 +10,56 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
+
+// Finall Accepted Solution ~103ms ~49mb
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+
+function ListNode(val, next) {
+  this.val = val === undefined ? undefined : val;
+  this.next = next === undefined ? null : next;
+}
+
 var addTwoNumbers = function (l1, l2) {
-  // inputs: are 2 linked lists: l1 and l2
-  // output: a linked list: l3
-  // l3 = l1 + l2
-  // convert l3 to a linked list
-
-  function ListNode(val, next) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-
-  // function linkedList() {
-  //   this.head = null;
-  //   this.size = 0;
-
-  //   let add = (element) => {
-  //     var node = new ListNode(element);
-
-  //     var current;
-
-  //     if (this.head == null) this.head = node;
-  //     else {
-  //       current = this.head;
-
-  //       while (current.next) {
-  //         current = current.next;
-  //       }
-
-  //       current.next = node;
-  //     }
-  //     this.size++;
-  //   };
-  // }
-
-  let sum = [];
   let newl1 = [];
   let newl2 = [];
+  let l3 = new ListNode();
 
-  current1 = l1.head;
-  current2 = l2.head;
+  [current1, current2] = [l1, l2];
 
-  while (current1 && current2) {
-    newl1.push(current1.element);
-    newl2.push(current2.element);
-    current1 = current1.next;
-    current2 = current2.next;
+  while (current1 || current2) {
+    if (current1) {
+      newl1.push(+current1.val);
+      current1 = current1.next;
+    }
+
+    if (current2) {
+      newl2.push(+current2.val);
+      current2 = current2.next;
+    }
   }
 
-  let num1 = "",
-    num2 = "";
-
-  newl1.map((num, i) => {
-    num1 += num;
-  });
-  newl2.map((num, i) => {
-    num2 += num;
-  });
-
-  let sum1 = (+num1 + +num2 + "").split("");
-  sum = [...sum1].reverse().map((x) => +x);
-
-  let l3 = new ListNode();
+  let num1 = BigInt(newl1.reverse().join(""));
+  let num2 = BigInt(newl2.reverse().join(""));
+  let sum = [...(num1 + num2).toString().split("")].reverse().map((x) => +x);
 
   let add = (element) => {
     var node = new ListNode(element);
-
     var current;
 
-    if (l3.val == 0 && l3.next == null) l3 = node;
+    if (l3.val == undefined && l3.next == null) l3 = node;
     else {
       current = l3;
 
@@ -94,9 +75,65 @@ var addTwoNumbers = function (l1, l2) {
     add(sum[i]);
   }
 
-  console.log(l3);
   return l3;
 };
+
+// function ListNode(val, next) {
+//   this.val = val === undefined ? undefined : val;
+//   this.next = next === undefined ? null : next;
+// }
+
+// var addTwoNumbers = function (l1, l2) {
+//   // inputs: are 2 linked lists: l1 and l2
+//   // output: a linked list: l3
+//   // l3 = l1 + l2
+//   // convert l3 to a linked list
+
+//   let sum = [];
+//   let newl1 = [];
+//   let newl2 = [];
+//   let l3 = new ListNode();
+
+//   [current1, current2] = [l1.head, l2.head];
+
+//   while (current1 || current2) {
+//     if (current1) {
+//       newl1.push(+current1.element);
+//       current1 = current1.next;
+//     }
+
+//     if (current2) {
+//       newl2.push(+current2.element);
+//       current2 = current2.next;
+//     }
+//   }
+
+//   newl1 = BigInt(newl1.reverse().join(""));
+//   newl2 = BigInt(newl2.reverse().join(""));
+//   sum = [...(newl1 + newl2).toString().split("")].reverse().map((x) => +x);
+
+//   let add = (element) => {
+//     var node = new ListNode(element);
+//     var current;
+
+//     if (l3.val == undefined && l3.next == null) l3 = node;
+//     else {
+//       current = l3;
+
+//       while (current.next) {
+//         current = current.next;
+//       }
+
+//       current.next = node;
+//     }
+//   };
+
+//   for (let i = 0; i < sum.length; i++) {
+//     add(sum[i]);
+//   }
+
+//   return l3;
+// };
 
 // head -> elemnent
 //         next -> element
@@ -185,15 +222,93 @@ class LinkedList {
   }
 }
 
-let newList1 = new LinkedList();
-let newList2 = new LinkedList();
+// let newList1 = new LinkedList();
+// let newList2 = new LinkedList();
 
-newList1.add(2);
-newList1.add(4);
-newList1.add(3);
+// let jump = [
+//   1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//   0, 0, 0, 0, 1,
+// ];
+// let sit = [5, 6, 4];
 
-newList2.add(5);
-newList2.add(6);
-newList2.add(4);
+// for (let i in jump) {
+//   newList1.add(jump[i]);
+// }
 
-console.log(addTwoNumbers(newList1, newList2));
+// for (let i in sit) {
+//   newList2.add(sit[i]);
+// }
+
+// console.log(addTwoNumbers(newList1, newList2));
+
+/////////////////
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+
+// function ListNode(val, next) {
+//   this.val = val === undefined ? undefined : val;
+//   this.next = next === undefined ? null : next;
+// }
+
+// var addTwoNumbers = function (l1, l2) {
+//   let sum = [];
+//   let newl1 = [];
+//   let newl2 = [];
+
+//   current1 = l1;
+//   current2 = l2;
+
+//   while (current1) {
+//     newl1.push(current1.val);
+//     current1 = current1.next;
+//   }
+
+//   while (current2) {
+//     newl2.push(current2.val);
+//     current2 = current2.next;
+//   }
+
+//   let num1 = "",
+//     num2 = "";
+
+//   newl1.reverse().map((num) => {
+//     num1 += num;
+//   });
+//   newl2.reverse().map((num) => {
+//     num2 += num;
+//   });
+
+//   let sum1 = (+num1 + +num2).toString().split("");
+//   sum = [...sum1].reverse().map((x) => +x);
+
+//   let l3 = new ListNode();
+
+//   let add = (element) => {
+//     var node = new ListNode(element);
+
+//     var current;
+
+//     if (l3.val === undefined && l3.next == null) l3 = node;
+//     else {
+//       current = l3;
+
+//       while (current.next) {
+//         current = current.next;
+//       }
+
+//       current.next = node;
+//     }
+//   };
+
+//   for (let i = 0; i < sum.length; i++) {
+//     add(sum[i]);
+//   }
+
+//   console.log(l3);
+//   return l3;
+// };
